@@ -31,11 +31,13 @@ jobs:
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
 
 
+name: Storybook Tests
+on: deployment_status
+jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
     if: github.event.deployment_status.state == 'success'
-
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -47,9 +49,7 @@ jobs:
 
       - name: Install dependencies
         run: npm ci
-
       - name: Run Storybook tests
         run: npm test-storybook
-
         env:
           TARGET_URL: '${{ github.event.deployment_status.target_url }}'
