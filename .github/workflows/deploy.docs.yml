@@ -33,7 +33,9 @@ jobs:
 
   test:
     needs: build-and-deploy
+    timeout-minutes: 60
     runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
 
     steps:
       - name: Checkout
