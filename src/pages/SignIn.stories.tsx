@@ -26,7 +26,7 @@ export const Default: StoryObj = {
   play: async ({canvasElement}) => {
     const canvas = within(canvasElement)
 
-    userEvent.type(canvas.getByPlaceholderText('Digite seu e-mail'), 'lucaorx@protonmail.com')
+    userEvent.type(canvas.getByPlaceholderText('Digite seu e-mail'), 'lucas@email.com')
     userEvent.type(canvas.getByPlaceholderText('*********'), '12345678')
 
     userEvent.click(canvas.getByRole('button'))
