@@ -24,3 +24,6 @@ jobs:
 
       - name: Run Storybook tests
         run: npm run test-storybook:ci
+
+        env:
+          REFERENCE_URL: https://lucaorx.github.io/ignite-lab-design-system
