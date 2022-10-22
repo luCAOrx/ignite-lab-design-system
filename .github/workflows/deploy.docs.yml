@@ -1,11 +1,13 @@
 name: Deploy Storybook
 
-on: deployment_status
+on:
+  push:
+    branches:
+      - main
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
-    if: github.event.deployment_status.state == 'success'
 
     steps:
       - name: Checkout
@@ -30,4 +32,3 @@ jobs:
 
         env: 
           GH_TOKEN: ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}
-          TARGET_URL: '${{ github.event.deployment_status.target_url }}'
