@@ -1,14 +1,12 @@
 name: Storybook Tests
 
-on:
-  push:
-    branches:
-      - main
+on: deployment_status
 
 jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    if: github.event.deployment_status.state == 'success'
 
     steps:
       - name: Checkout
@@ -22,8 +20,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Install Playwright
+        run: npx playwright install --with-deps
+
       - name: Run Storybook tests
-        run: npm run test-storybook:ci
+        run: npm run test-storybook
 
         env:
-          REFERENCE_URL: https://lucaorx.github.io/ignite-lab-design-system
+          TARGET_URL: '${{ github.event.deployment_status.target_url }}'
